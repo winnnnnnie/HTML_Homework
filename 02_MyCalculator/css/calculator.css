@@ -1,0 +1,49 @@
+
+/* 按鈕設定顏色 */
+#calculator{
+   
+    background-color: #121212;
+    display: inline-block;
+    padding: 5px;
+
+}
+.from{
+     border-collapse: collapse;
+}
+.from td{
+    width: 70px;
+    height: 70px;
+    padding: 5px ;
+    
+
+}
+.from a{
+   width: 100%;
+   font-size: 1.5rem;
+    display: block;
+    line-height: 70px;
+    padding:0 15px;
+    color: #fff;
+    text-decoration: none;
+    background: #333;
+    text-align: center;
+    border-radius: 35px;
+    box-sizing: border-box;
+
+
+}
+/* 顯示區標示 */
+ a.from_star {
+     text-align: right;
+    height: 100px;
+    font-size: 4.5rem;
+    line-height: 100px;
+    background-color:#121212 ;
+}
+/* 特別色標示 */
+.from tr:nth-child(2) a {
+    background-color:gray;
+}
+.from td:nth-child(4) a , .from tr:nth-child(6) td:nth-child(3) a  { 
+    background-color:orange;
+}
