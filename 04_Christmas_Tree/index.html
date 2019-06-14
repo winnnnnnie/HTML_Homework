@@ -11,7 +11,7 @@
 </head>
 
 <body>
-
+    <p id="pSquare"></p>
     <script>
         // 分解動作
         // 1. 觀察列和星星數量的變化: 星星數量 = 最終列 + 最終列 - 1
@@ -22,6 +22,29 @@
         //    第三列：1=>1、7=>7
         //    第四列：
         // 3. 觀察星星中間位置: 中間位置 = 最終列
+        //有一個迴圈數量會是列*2-1
+        var stars = "";
+        var rows = 5;
+
+        //列
+        for (var j = 1; j <= rows; j++) {
+
+            //欄
+            for (var i = 1; i <= (rows * 2 - 1); i++) {
+
+                //判斷要畫星星還是空白
+                if (i <= (rows - j) || i >= (rows + j)) {
+                    stars = stars + "&emsp;";
+                } else {
+                    stars = stars + "＊";
+                }
+            }
+            //在此層換行
+            stars = stars + "<br>"
+        }
+        document.getElementById("pSquare").innerHTML = stars;
+
+
     </script>
 </body>
 
