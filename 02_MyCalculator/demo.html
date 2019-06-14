@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <table>
+        <form name=calcul>
+            <tr>
+                <td colspan=4><input type=TEXT name=itext value="0" onFocus="{document.calcul.itext.blur();}"></td>
+            </tr>
+            <tr>
+                <td><input type=BUTTON name="SUBMIT" value=" 7 " onClick="{num(7)}"></td>
+                <td><input type=BUTTON value=" 8 " onClick="{num(8)}" name="BUTTON"></td>
+                <td><input type=BUTTON value=" 9 " onClick="{num(9)}" name="BUTTON"></td>
+                <td><input type=BUTTON value=" + " onClick="{func('+')}" name="BUTTON"> </td>
+            </tr>
+            <tr>
+                <td><input type=BUTTON value=" 4 " onClick="{num(4)}" name="BUTTON"></td>
+                <td><input type=BUTTON value=" 5 " onClick="{num(5)}" name="BUTTON"></td>
+                <td><input type=BUTTON value=" 6 " onClick="{num(6)}" name="BUTTON"></td>
+                <td><input type=BUTTON value=" - " onClick="{func('-')}" name="BUTTON"></td>
+            </tr>
+            <tr>
+                <td><input type=BUTTON value=" 1 " onClick="{num(1)}" name="BUTTON"></td>
+                <td><input type=BUTTON value=" 2 " onClick="{num(2)}" name="BUTTON"></td>
+                <td><input type=BUTTON value=" 3 " onClick="{num(3)}" name="BUTTON"></td>
+                <td><input type=BUTTON value=" / " onClick="{func('/')}" name="BUTTON"></td>
+            </tr>
+            <tr>
+                <td><input type=BUTTON value=" 0 " onClick="{num(0)}" name="BUTTON"></td>
+                <td><input type=BUTTON value=" C " onClick="{clearvals()}" name="BUTTON"></td>
+                <td><input type=BUTTON value=" = " onClick="{doit()}" name="BUTTON"></td>
+                <td><input type=BUTTON value=" x " onClick="{func('x')}" name="BUTTON"></td>
+            </tr>
+        </form>
+    </table>
+
+    <script>
+        var memory1; var functype; var set; functype = "0";set = "0";
+        function num(thisval) {
+            var curval;
+            var numval;
+            numval = eval(thisval);
+            curval = eval(document.calcul.itext.value);
+            if (curval == 0 || set == "1") {
+                curval = numval;
+            } else {
+                curval = curval * 10; curval = curval + numval;
+            }
+            document.calcul.itext.value = curval; set = "0";
+        }
+       function clearvals() { 
+            memory1 = 0 ;
+            document.calcul.itext.value = 0; }
+        function func(type) {
+            if (functype != "0") doit();
+            functype = type; memory1 = eval(document.calcul.itext.value);
+            document.calcul.itext.value = 0;
+        } 
+        function doit() {
+            var curval;
+            if (set == "1" || functype == "0") return;
+            curval = eval(document.calcul.itext.value);
+            if (functype == "/") memory1 = memory1 / curval;
+            if (functype == "+") memory1 = memory1 + curval;
+            if (functype == "-") memory1 = memory1 - curval;
+            if (functype == "x") memory1 = memory1 * curval;
+            curval = memory1; memory1 = 0; functype = "0";
+            document.calcul.itext.value = curval; set = "1";
+        } 
+        </script>
+</body>
+
+</html>
