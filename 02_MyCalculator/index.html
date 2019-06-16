@@ -4,64 +4,107 @@
 <head>
     <meta charset="UTF-8">
     <title>My Calculator</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/calculator.css">
 </head>
 
 <body>
 
-   <p><a href="https://www.desmos.com/scientific" target="_blank">參考網路上面的計算機</a></p>
-  
+    <p><a href="https://www.desmos.com/scientific" target="_blank">參考網路上面的計算機</a></p>
+
     <div id="calculator">
-      <table class="from" >
-         <tr>
-             <td colspan="4"  > <a href="" class="from_star">0</a> </td>
-             <!-- <td></td> -->
-             <!-- <td></td> -->
-             <!-- <td></td> -->
-         </tr>
-         <tr>
-             <td ><a href="">AC</a></td>
-             <td><a href="">+/-</a></td>
-             <td><a href="">%</a></td>
-             <td><a href="">除</a></td>
-            
-         </tr>
-         <tr>
-             
-            <td><a href="">7</a></td>
-            <td><a href="">8</a></td>
-            <td><a href="">9</a></td>
-            <td><a href="">X</a></td>
+        <table class="from">
+            <form name=calcul action="">
+                <tr>
+                    <td colspan=4><input type=TEXT name=itext value="0" onFocus="{document.calcul.itext.blur();}"></td>
+                    <!-- <td></td> -->
+                    <!-- <td></td> -->
+                    <!-- <td></td> -->
+                </tr>
+                <tr>
+                    <td><input type=BUTTON value=" C " onClick="{clearvals()}" name="BUTTON"></td>
+                    <td><input type=BUTTON value=" +/- " onClick="{func('+')}" name="BUTTON"> </td>
+                    <td><input type=BUTTON value=" % " onClick="{func('%')}" name="BUTTON"> 
+                        </td>
+                    <td><input type=BUTTON value=" / " onClick="{func('/')}" name="BUTTON"></td>
 
-        
-         </tr>
-         <tr>
-             <td><a href="">4</a></td>
-             <td><a href="">5</a></td>
-             <td><a href="">6</a></td>
-             <td><a href="">-</a></td>
+                </tr>
+                <tr>
 
-             
-         </tr>
-         <tr>
-            <td><a href="">1</a></td>
-            <td><a href="">2</a></td>
-            <td><a href="">3</a></td>
-            <td><a href="">+</a></td>
+                    <td><input type=BUTTON name="SUBMIT" value=" 7 " onClick="{num(7)}"></td>
+                    <td><input type=BUTTON value=" 8 " onClick="{num(8)}" name="BUTTON"></td>
+                    <td><input type=BUTTON value=" 9 " onClick="{num(9)}" name="BUTTON"></td>
 
-        
-         </tr>
-         <tr>
-                <td colspan="2" ><a href="">0</a></td>
-             <!-- <td><a href=""></a></td> -->
-             <td><a href="">.</a></td>
-             <td><a href="">=</a></td>
-             
-         </tr>
+                    <td><input type=BUTTON value=" x " onClick="{func('x')}" name="BUTTON"></td>
 
-      </table>
+
+                </tr>
+                <tr>
+                    <td><input type=BUTTON value=" 4 " onClick="{num(4)}" name="BUTTON"></td>
+                    <td><input type=BUTTON value=" 5 " onClick="{num(5)}" name="BUTTON"></td>
+                    <td><input type=BUTTON value=" 6 " onClick="{num(6)}" name="BUTTON"></td>
+                    <td><input type=BUTTON value=" - " onClick="{func('-')}" name="BUTTON"></td>
+
+
+                </tr>
+                <tr>
+                    <td><input type=BUTTON value=" 1 " onClick="{num(1)}" name="BUTTON"></td>
+                    <td><input type=BUTTON value=" 2 " onClick="{num(2)}" name="BUTTON"></td>
+                    <td><input type=BUTTON value=" 3 " onClick="{num(3)}" name="BUTTON"></td>
+                    <td><input type=BUTTON value=" + " onClick="{func('+')}" name="BUTTON"> </td>
+
+
+                </tr>
+                <tr>
+                    <td colspan="2"><input type=BUTTON value=" 0 " onClick="{num(0)}" name="BUTTON"></td>
+                    <!-- <td><a href=""></a></td> -->
+                    <td>
+                    
+                        <input type=BUTTON value=" . " onClick="{num(.)}" name="BUTTON"></td>
+                    <td><input type=BUTTON value=" = " onClick="{doit()}" name="BUTTON"></td>
+
+                </tr>
+            </form>
+
+
+        </table>
 
     </div>
+    <script>
+        var memory1; var functype; var set; functype = "0"; set = "0";
+        function num(thisval) {
+            var curval;
+            var numval;
+            numval = eval(thisval);
+            curval = eval(document.calcul.itext.value);
+            if (curval == 0 || set == "1") {
+                curval = numval;
+            } else {
+                curval = curval * 10; curval = curval + numval;
+            }
+            document.calcul.itext.value = curval; set = "0";
+        }
+        function clearvals() {
+            memory1 = 0;
+            document.calcul.itext.value = 0;
+        }
+        function func(type) {
+            if (functype != "0") doit();
+            functype = type; memory1 = eval(document.calcul.itext.value);
+            document.calcul.itext.value = 0;
+        }
+        function doit() {
+            var curval;
+            if (set == "1" || functype == "0") return;
+            curval = eval(document.calcul.itext.value);
+            if (functype == "/") memory1 = memory1 / curval;
+            if (functype == "+") memory1 = memory1 + curval;
+            if (functype == "-") memory1 = memory1 - curval;
+            if (functype == "x") memory1 = memory1 * curval;
+            curval = memory1; memory1 = 0; functype = "0";
+            document.calcul.itext.value = curval; set = "1";
+        } 
+    </script>
 
 
 
